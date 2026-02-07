@@ -13,7 +13,6 @@ jobs:
         run: pip install -r requirements.txt
       - name: Start
         env:
-          GOOGLE_JSON: ${{ secrets.GOOGLE_JSON }}
           GOOGLE_CREDENTIALS_JSON: service_account.json
           SITEMAP_URL: https://liidl.shop
         run: |
