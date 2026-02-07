@@ -15,4 +15,4 @@ jobs:
           GOOGLE_JSON: ${{ secrets.GOOGLE_JSON }}
         run: |
           echo "$GOOGLE_JSON" > service_account.json
-          python google_indexing.py --site-url https://liidl.shop --sitemap-url https://liidl.shopsitemap.xml
+          python main.py
