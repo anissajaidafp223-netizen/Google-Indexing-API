@@ -1,5 +1,8 @@
 name: Run_Google_Indexing
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * *'
 jobs:
   run-script:
     runs-on: ubuntu-latest
