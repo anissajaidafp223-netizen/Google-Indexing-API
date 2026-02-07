@@ -14,5 +14,5 @@ jobs:
       - name: Start
         env:
           GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_JSON }}
-          SITEMAP_URL: https://liidl.shop/app-resources/sitemap_products_1.xml.gz
+          SITEMAP_URL: https://liidl.shop/app-resources/sitemaps/sitemap_products_1.xml.gz
         run: python main.py
