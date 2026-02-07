@@ -37,8 +37,8 @@ def fetch_sitemap_urls(sitemap_url):
             with gzip.GzipFile(fileobj=io.BytesIO(content)) as f:
                 content = f.read()
         root = ET.fromstring(content)
-        namespace = {'ns': 'http://www.sitemaps.org'}
-        urls = [url.text for url in root.findall(".//ns:loc", namespace)]
+       locs = root.findall(".//{*}loc")
+urls = [url.text for url in locs if url.text]
         logging.info(f"Found {len(urls)} URLs")
         return urls
     except Exception as e:
