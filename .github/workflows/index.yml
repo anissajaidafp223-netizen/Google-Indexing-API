@@ -17,5 +17,5 @@ jobs:
           GOOGLE_CREDENTIALS_JSON: service_account.json
           SITEMAP_URL: https://liidl.shop
         run: |
-          echo "${{ secrets.GOOGLE_JSON }}" | base64 -d > service_account.json
+          echo "${{ secrets.GOOGLE_JSON }}" | tr -d '\n ' | base64 -d > service_account.json
           python main.py
