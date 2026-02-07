@@ -14,7 +14,7 @@ def fetch_sitemap_urls(sitemap_url):
                 content = f.read()
         
         root = ET.fromstring(content)
-        namespace = {'ns': 'http://www.sitemaps.org'}
+        namespace = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
         return [url.text for url in root.findall(".//ns:loc", namespace)]
     except Exception as e:
         logging.error(f"解析站点地图失败: {e}")
