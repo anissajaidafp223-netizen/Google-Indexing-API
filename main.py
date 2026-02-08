@@ -46,6 +46,9 @@ def fetch_sitemap_urls(sitemap_url):
         return []
 
 def notify_google(session, credentials, url):
+    # 核心修改：每个请求之间随机停 1-3 秒，防止刷太快被谷歌拦截
+    time.sleep(random.uniform(1, 3))
+    
     body = {"url": url, "type": "URL_UPDATED"}
     headers = {"Authorization": f"Bearer {credentials.token}", "Content-Type": "application/json"}
     try:
@@ -76,17 +79,16 @@ def main():
             logging.error("No URLs found.")
             return
 
-        # Randomize to cover all products over time
+        # 随机打乱，确保每天推不同的商品
         logging.info("Shuffling URLs for full coverage...")
         random.shuffle(urls) 
 
         session = requests.Session()
         with ThreadPoolExecutor(max_workers=5) as executor:
-            # We push all; Google handles the 200 quota via 429 errors
             for url in urls:
                 executor.submit(notify_google, session, credentials, url)
         
-        logging.info("Task finished.")
+        logging.info("Task finished successfully.")
     except Exception as e:
         logging.error(f"Runtime error: {e}")
 
