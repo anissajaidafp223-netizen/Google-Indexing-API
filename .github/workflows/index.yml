@@ -1,23 +1,30 @@
 name: Run_Google_Indexing
+
 on:
- push:
+  push:
     branches:
+      - main
   workflow_dispatch:
   schedule:
     - cron: '0 8 * * *'
+
 jobs:
   run-script:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+          
       - name: Install Dependencies
         run: pip install -r requirements.txt
-      - name: Start
+        
+      - name: Start Push
         env:
-          GOOGLE_JSON: ${{ secrets.GOOGLE_JSON }}
-          SITEMAP_URL: https://liidl.shop/app-resources/sitemaps/sitemap_products_1.xml.gz
+          # 💡 这里的名字必须和你 GitHub Settings -> Secrets 里的名字一模一样
+          GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+          SITEMAP_URL: ${{ secrets.SITEMAP_URL }}
         run: python main.py
